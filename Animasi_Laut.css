@@ -1,0 +1,208 @@
+
+.container {
+    background-color: rgb(104, 177, 201);
+    width: 50vw;
+    height: 70vh;
+    border: 2vh;
+    border-radius: 1vh;
+    border-color: white;
+    border-style: solid;
+    position: relative;
+    overflow: hidden;
+}
+
+.layar {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.ground {
+    position: absolute;
+    width: 100%;
+    height: 5vh;
+    background-color: rgb(229, 200, 122);
+    bottom: 0;
+    left: 0;
+    /* PERBAIKAN 1: Ground harus di atas rumput */
+    z-index: 10;
+}
+
+.lapisan {
+    background-color: rgb(244, 202, 125);
+    width: 100%;
+    height: 1vh;
+    position: absolute;
+}
+
+.plant {
+    position: absolute;
+    background-color: green;
+    bottom: 0;
+    width: 1vw;
+    border-radius: 2vw;
+    /* PERBAIKAN 1: Rumput di belakang ground */
+    z-index: 9;
+    transform-origin: bottom center;
+}
+
+.plant1 {
+    left: 20%;
+    height: 22vh;
+    /* Dibuat bolak-balik agar halus */
+    animation: rumput 4s infinite ease-in-out alternate;
+}
+
+.plant2 {
+    left: 45%;
+    height: 33vh;
+    animation: rumput 6s infinite ease-in-out alternate;
+}
+
+.plant3 {
+    left: 80%;
+    height: 26vh;
+    animation: rumput 5s infinite ease-in-out alternate;
+}
+
+@keyframes rumput {
+    /* Dibuat bolak-balik agar halus */
+    from {
+        transform: rotate(-8deg);
+    }
+    to {
+        transform: rotate(8deg);
+    }
+}
+
+.buble {
+    background-color: beige;
+    position: absolute;
+    width: 3vw;
+    height: 3vw;
+    border-radius: 100%;
+    opacity: 0.1;
+    bottom: 0;
+    /* Bubbles di paling depan */
+    z-index: 12; 
+}
+
+.buble1 { left: 20%; animation: buble 9s infinite; }
+.buble2 { left: 45%; animation: buble 10s infinite; }
+.buble3 { left: 90%; animation: buble 8s infinite; }
+.buble4 { left: 76%; animation: buble 9s infinite; }
+.buble5 { left: 5%; animation: buble 8s infinite; }
+
+@keyframes buble {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-800%); }
+}
+
+.fish {
+    left: 100%;
+    position: absolute;
+    border-radius: 40% 40% 40% 40%;
+    width: 52px;
+    height: 30px;
+    /* Ikan di belakang rumput */
+    z-index: 5;
+}
+
+.fish1 {
+    top: 10%;
+    background-color: beige;
+    animation: renang 19s infinite linear;
+    animation-delay: -5s; /* PERBAIKAN 4: Dibuat bergantian */
+}
+
+.fish2 {
+    top: 30%;
+    background-color: rgb(62, 89, 245);
+    animation: renang 14s infinite linear;
+    animation-delay: -10s; /* PERBAIKAN 4: Dibuat bergantian */
+}
+
+.fish3 {
+    top: 40%;
+    background-color: rgb(240, 240, 207);
+    animation: renang 10s infinite linear;
+    animation-delay: -2s; /* PERBAIKAN 4: Dibuat bergantian */
+}
+
+/* TAMBAHAN IKAN (sesuai HTML di Langkah 2) */
+.fish4 {
+    top: 60%;
+    background-color: #1e90ff; /* Biru */
+    animation: renang 15s infinite linear;
+    animation-delay: -15s;
+}
+
+.fish5 {
+    top: 20%;
+    background-color: #dc143c; /* Merah */
+    animation: renang 12s infinite linear;
+    animation-delay: 0s;
+}
+
+.eye {
+    position: absolute;
+    color: black;
+    top: 5px;
+    left: 10px;
+    margin: 0;
+    line-height: 1;
+    font-size: 1.2rem;
+    font-weight: bold;
+    /* Tambah animasi kedip */
+    animation: blink 3s infinite;
+}
+
+/* Keyframe baru untuk mata kedip */
+@keyframes blink {
+    0%, 90% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+    100% { transform: scaleY(1); }
+}
+
+@keyframes renang {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Ikan berenang sampai -110% (keluar layar kiri) */
+        transform: translateX(calc(-50vw - 70px));
+    }
+}
+
+/* PERBAIKAN 3: Membuat ekor berayun*/
+.tail {
+    position: absolute;
+    left: 45px;
+    border-bottom: 37px solid;
+    border-right: 37px solid;
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    top: -3px; 
+    
+    /* Tambahkan pivot dan animasi */
+    transform-origin: 0% 50%; /* Pivot di kiri tengah */
+    animation: wag 0.8s infinite alternate ease-in-out;
+}
+
+/* Keyframe baru untuk ekor berayun */
+@keyframes wag {
+    from {
+        transform: rotate(15deg);
+    }
+    to {
+        transform: rotate(-15deg);
+    }
+}
+
+.tail1 { border-color: orange; }
+.tail2 { border-color: rgb(73, 143, 255); }
+.tail3 { border-color: rgb(218, 184, 120); }
+
+/* Ekor untuk ikan baru (sesuai HTML di Langkah 2) */
+.tail4 { border-color: #87cefa; } /* Ekor biru muda */
+.tail5 { border-color: #ff6f61; } /* Ekor merah muda */

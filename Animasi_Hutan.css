@@ -1,0 +1,157 @@
+/*
+ * ===================================================
+ * KODE CSS UNTUK FILE: Animasi_Hutan_Loop.css
+ * ===================================================
+*/
+
+/* -- 1. Wadah Scene -- */
+.forest-scene-loop {
+    width: 100%;
+    height: 70vh;
+    /* Langit biru dan tanah hijau dalam satu gradient */
+    background: linear-gradient(to bottom, #87ceeb 70%, #2e8b57 70%);
+    position: relative;
+    overflow: hidden;
+    border: 2vh solid #5c4033; /* Bingkai coklat */
+    border-radius: 1vh;
+}
+
+/* -- 2. Langit dan Awan (Looping) -- */
+.sky-loop {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+}
+
+.cloud-loop {
+    position: absolute;
+    background: #fff;
+    border-radius: 50px;
+    opacity: 0.9;
+    /* Animasi awan bergerak */
+    animation: move-clouds 20s infinite linear;
+}
+/* Membuat bentuk awan sederhana */
+.cloud-loop::before, .cloud-loop::after {
+    content: '';
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+}
+.cloud-1 {
+    width: 100px; height: 60px;
+    top: 15%;
+    animation-duration: 25s; /* Kecepatan beda */
+}
+.cloud-1::before { width: 60px; height: 60px; top: -30px; left: 20px; }
+.cloud-1::after  { width: 70px; height: 70px; top: -20px; right: 10px; }
+
+.cloud-2 {
+    width: 80px; height: 50px;
+    top: 30%;
+    animation-duration: 35s; /* Kecepatan beda */
+}
+.cloud-2::before { width: 50px; height: 50px; top: -25px; left: 15px; }
+.cloud-2::after  { width: 60px; height: 60px; top: -20px; right: 5px; }
+
+@keyframes move-clouds {
+    0%   { transform: translateX(-150px); } /* Mulai dari luar layar kiri */
+    100% { transform: translateX(calc(50vw + 150px)); } /* Selesai di luar layar kanan */
+}
+
+/* -- 3. Tanah dan Semak (Looping) -- */
+.ground-loop {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 5vh;
+    background: #8b4513; /* Tanah coklat di paling bawah */
+    z-index: 10;
+}
+
+.bush-loop {
+    position: absolute;
+    bottom: 5vh; /* Duduk di atas tanah */
+    width: 100px; height: 60px;
+    background: #228B22; /* Hijau tua */
+    border-radius: 50% 50% 0 0;
+    z-index: 11;
+    transform-origin: bottom center;
+    animation: sway-light 4s infinite ease-in-out alternate;
+}
+.bush-1 { left: 10%; }
+.bush-2 { left: 70%; width: 80px; height: 50px; animation-duration: 5s; }
+
+/* -- 4. Pohon (Looping) -- */
+.tree-loop {
+    position: absolute;
+    bottom: 5vh; /* Duduk di atas tanah */
+    width: 25px; /* Lebar batang */
+    height: 3vh; /* Tinggi batang */
+    background: #8B4513;
+    z-index: 8;
+    transform-origin: bottom center;
+    /* Animasi pohon bergoyang */
+    animation: sway-heavy 6s infinite ease-in-out alternate;
+    bottom: 1px;
+}
+
+.leaves-loop {
+    position: absolute;
+    top: -50px; /* Posisi daun di atas batang */
+    left: -60px;
+    width: 150px; /* Lebar daun */
+    height: 150px; /* Tinggi daun */
+    background: #006400; /* Hijau daun */
+    border-radius: 50%;
+}
+/* Membuat daun terlihat lebih acak */
+.leaves-loop::before, .leaves-loop::after {
+    content: '';
+    position: absolute;
+    background: #228B22;
+    border-radius: 50%;
+}
+.leaves-loop::before { width: 100px; height: 100px; top: -30px; left: -20px; }
+.leaves-loop::after  { width: 120px; height: 120px; top: -20px; right: -30px; }
+
+.tree-1 { left: 25%; z-index: 7; height: 40vh; animation-duration: 7s; }
+.tree-2 { left: 50%; z-index: 9; height: 30vh; animation-duration: 5s; }
+.tree-3 { left: 80%; z-index: 7; height: 38vh; animation-duration: 6.5s; }
+
+/* -- Keyframes Animasi -- */
+
+/* Goyangan pelan untuk semak */
+@keyframes sway-light {
+    from { transform: rotate(-3deg); }
+    to   { transform: rotate(3deg); }
+}
+
+/* Goyangan lebih berat untuk pohon */
+@keyframes sway-heavy {
+    from { transform: rotate(-6deg); }
+    to   { transform: rotate(6deg); }
+}
+
+/* Gerakan sayap burung */
+@keyframes flap-wings {
+    from { transform: rotate(45deg) scaleY(1); }
+    to   { transform: rotate(40deg) scaleY(-1); }
+}
+.bird-loop::after {
+    animation-name: flap-wings-right;
+}
+@keyframes flap-wings-right {
+    from { transform: rotate(-45deg) scaleY(1); }
+    to   { transform: rotate(-40deg) scaleY(-1); }
+}
+
+/* Gerakan terbang burung (naik-turun) */
+@keyframes fly-loop {
+    0%   { left: -50px; top: 20%; }
+    25%  { top: 15%; }
+    50%  { left: calc(50vw + 50px); top: 25%; } /* Terbang keluar layar */
+    51%  { left: -50px; top: 30%; } /* Muncul lagi di posisi beda */
+    75%  { top: 25%; }
+    100% { left: calc(50vw + 50px); top: 35%; }
+}
